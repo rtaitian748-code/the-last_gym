@@ -1665,16 +1665,16 @@ address {
   display: none;
 }
 .shop__gallery-list {
-  width: 177px;
+  width: 310px;
   scroll-snap-type: x mandatory;
 }
 .shop__gallery-item {
-  flex: 0 0 177px;
+  flex: 0 0 310px;
   scroll-snap-align: start;
 }
 .shop__gallery-img {
-  width: 177px;
-  height: 177px;
+  width: 310px;
+  height: 310px;
   border-radius: 24px;
   background-color: #e4e4e4;
   -o-object-fit: cover;
@@ -1875,51 +1875,36 @@ address {
   line-height: 1.45;
 }
 .faq-item__icon {
-  position: relative;
-  display: block;
-  width: 12px;
-  height: 7px;
-}
-.faq-item__icon::before, .faq-item__icon::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 9.2195444573px;
-  height: 1.5px;
-  background-color: #ffffff;
-}
-.faq-item__icon::before {
-  left: 0;
-  transform-origin: left top;
-  transform: rotate(49.398705355deg);
-}
-.faq-item__icon::after {
-  right: 0;
-  transform-origin: right top;
-  transform: rotate(-49.398705355deg);
-}
-.faq-item__icon {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #ffffff;
   flex-shrink: 0;
   margin-left: 10px;
   transition: transform 0.3s ease;
 }
 .faq-item__answer {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
 }
 .faq-item__answer-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 7px;
   overflow: hidden;
+  padding: 16px 20px 16px 12px;
 }
-.faq-item__A {
+.faq-item__a {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 0;
-  position: absolute;
-  top: 16px;
-  left: 12px;
+  flex-shrink: 0;
   width: 40px;
   height: 39px;
   border: 1px solid #c1a780;
@@ -1931,17 +1916,17 @@ address {
   line-height: 1;
 }
 .faq-item__answer-text {
-  padding: 0 20px 16px 59px;
+  flex: 1;
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 500;
   line-height: 1.45;
 }
 .faq-item.is-open .faq-item__icon {
   transform: rotate(180deg);
 }
 .faq-item.is-open .faq-item__answer {
-  grid-template-rows: 1fr;
+  max-height: 300px;
 }
 
 @media screen and (max-width: 900px) {

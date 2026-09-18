@@ -1277,18 +1277,18 @@ address {
   &__gallery-list {
     @include m.flex(flex-start, center, row, 35px);
     @include m.scroll-x;
-    width: 177px;
+    width: 310px;
     scroll-snap-type: x mandatory;
   }
 
   &__gallery-item {
-    flex: 0 0 177px;
+    flex: 0 0 310px;
     scroll-snap-align: start;
   }
 
   &__gallery-img {
-    width: 177px;
-    height: 177px;
+    width: 310px;
+    height: 310px;
     border-radius: 24px;
     background-color: v.$color-gray;
     object-fit: cover;
@@ -1434,29 +1434,33 @@ address {
     @include m.font(v.$font-size-lg, v.$font-weight-medium);
   }
 
-  // 開閉矢印アイコン(閉:下向き / 開:回転して上向き)
+  // 開閉矢印アイコン(.sidebar--nav の矢印と同じ見た目 / 色は白 / 閉:下向き / 開:回転して上向き)
   &__icon {
-    @include m.chevron-down(12px, 7px, v.$color-white, 1.5px);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid v.$color-white;
     flex-shrink: 0;
     margin-left: 10px;
     transition: transform v.$transition-base;
   }
 
   &__answer {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows v.$transition-base;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height v.$transition-base;
   }
 
   &__answer-inner {
+    @include m.flex(flex-start, flex-start, row, 7px);
     overflow: hidden;
+    padding: 16px 20px 16px 12px;
   }
 
-  &__A {
+  &__a {
     @include m.flex-center;
-    position: absolute;
-    top: 16px;
-    left: 12px;
+    flex-shrink: 0;
     width: 40px;
     height: 39px;
     border: 1px solid v.$color-brown;
@@ -1467,9 +1471,9 @@ address {
   }
 
   &__answer-text {
-    padding: 0 20px 16px 59px;
+    flex: 1;
     color: v.$color-white;
-    @include m.font(v.$font-size-sm, v.$font-weight-regular);
+    @include m.font(v.$font-size-lg, v.$font-weight-medium);
   }
 
   &.is-open {
@@ -1478,7 +1482,7 @@ address {
     }
 
     .faq-item__answer {
-      grid-template-rows: 1fr;
+      max-height: 300px;
     }
   }
 }
