@@ -31,11 +31,25 @@
       <h1 class="header__logo">
         <img class="header__logo-img" src="./images/logo.png" alt="THE LAST GYM" width="85" height="25">
       </h1>
-      <button class="header__menu" type="button" aria-label="メニューを開く">
+      <button class="header__menu" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="header-nav">
         <span class="header__menu-bar"></span>
         <span class="header__menu-bar"></span>
         <span class="header__menu-bar"></span>
       </button>
+      <nav class="header__nav" id="header-nav" aria-label="グローバルナビゲーション" aria-hidden="true">
+        <div class="header__nav-inner">
+          <ul class="header__nav-list">
+            <li class="header__nav-item"><a class="header__nav-link" href="#campaign">キャンペーン</a></li>
+            <li class="header__nav-item"><a class="header__nav-link" href="#worries">お悩み</a></li>
+            <li class="header__nav-item"><a class="header__nav-link" href="#strength">最大の特長</a></li>
+            <li class="header__nav-item"><a class="header__nav-link" href="#choose">選ばれる理由</a></li>
+            <li class="header__nav-item"><a class="header__nav-link" href="#shop">店舗情報</a></li>
+            <li class="header__nav-item"><a class="header__nav-link" href="#flow">体験の流れ</a></li>
+            <li class="header__nav-item"><a class="header__nav-link" href="#faq">よくある質問</a></li>
+          </ul>
+          <a class="header__nav-cta" href="#reserve">初回体験を予約する</a>
+        </div>
+      </nav>
     </header>
 
     <!-- fv -->
@@ -465,24 +479,64 @@
       <h2 class="faq__title"><span class="tag en">Quetion</span>よくある質問</h2>
       <ul class="faq__list">
         <li class="faq-item">
-          <span class="en faq-item__q">Q</span>
-          <p class="faq-item__question">1回の予約で3つすべて受けられますか？</p>
+          <div class="faq-item__header" role="button" tabindex="0" aria-expanded="false">
+            <span class="en faq-item__q">Q</span>
+            <p class="faq-item__question">1回の予約で3つすべて受けられますか？</p>
+            <span class="faq-item__icon" aria-hidden="true"></span>
+          </div>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p class="faq-item__answer-text">※回答文をご記入ください（ダミーテキストです）</p>
+            </div>
+          </div>
         </li>
         <li class="faq-item">
-          <span class="en faq-item__q">Q</span>
-          <p class="faq-item__question">どのメニューを選べばいいか分かりません。</p>
+          <div class="faq-item__header" role="button" tabindex="0" aria-expanded="false">
+            <span class="en faq-item__q">Q</span>
+            <p class="faq-item__question">どのメニューを選べばいいか分かりません。</p>
+            <span class="faq-item__icon" aria-hidden="true"></span>
+          </div>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p class="faq-item__answer-text">※回答文をご記入ください（ダミーテキストです）</p>
+            </div>
+          </div>
         </li>
         <li class="faq-item">
-          <span class="en faq-item__q">Q</span>
-          <p class="faq-item__question">運動初心者でも大丈夫ですか？</p>
+          <div class="faq-item__header" role="button" tabindex="0" aria-expanded="false">
+            <span class="en faq-item__q">Q</span>
+            <p class="faq-item__question">運動初心者でも大丈夫ですか？</p>
+            <span class="faq-item__icon" aria-hidden="true"></span>
+          </div>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p class="faq-item__answer-text">※回答文をご記入ください（ダミーテキストです）</p>
+            </div>
+          </div>
         </li>
         <li class="faq-item">
-          <span class="en faq-item__q">Q</span>
-          <p class="faq-item__question">厳しい食事制限はありますか？</p>
+          <div class="faq-item__header" role="button" tabindex="0" aria-expanded="false">
+            <span class="en faq-item__q">Q</span>
+            <p class="faq-item__question">厳しい食事制限はありますか？</p>
+            <span class="faq-item__icon" aria-hidden="true"></span>
+          </div>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p class="faq-item__answer-text">※回答文をご記入ください（ダミーテキストです）</p>
+            </div>
+          </div>
         </li>
         <li class="faq-item">
-          <span class="en faq-item__q">Q</span>
-          <p class="faq-item__question">体験時の持ち物はありますか？</p>
+          <div class="faq-item__header" role="button" tabindex="0" aria-expanded="false">
+            <span class="en faq-item__q">Q</span>
+            <p class="faq-item__question">体験時の持ち物はありますか？</p>
+            <span class="faq-item__icon" aria-hidden="true"></span>
+          </div>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p class="faq-item__answer-text">※回答文をご記入ください（ダミーテキストです）</p>
+            </div>
+          </div>
         </li>
       </ul>
     </section>
@@ -577,5 +631,6 @@
     <a class="sidebar__cta" href="#reserve">初回体験を予約する</a>
   </aside>
 
+  <script src="./js/main.js" defer></script>
 </body>
 </html>

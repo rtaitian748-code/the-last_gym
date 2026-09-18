@@ -104,18 +104,53 @@ address {
 }
 
 .global-nav {
+  background-color: v.$color-white;
+  padding: v.$lp-side-padding;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+
   &__list {
-    @include m.stack(15px, flex-start);
+    @include m.stack(20px, flex-start);
+  }
+
+  &__item {
+    opacity: 1;
+    transform: none;
+    padding: 5px 0;
+    border-bottom: 1px solid #d0f5ef;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 20px;
   }
 
   &__link {
     display: block;
-    @include m.font(v.$font-size-md, v.$font-weight-medium, 1);
+    @include m.font(v.$font-size-xl, v.$font-weight-medium, 1);
     text-decoration: none;
     transition: color v.$transition-base;
+    position: relative;
 
     &:hover {
       color: v.$color-brown;
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      top: 50%;
+      right: 10%;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid v.$color-black;
+      transform: translateY(-50%);
+    }
+
+    &:hover::after {
+      border-top-color: v.$color-brown;
     }
   }
 }
@@ -138,7 +173,22 @@ address {
 // ----------------------------------------------------------
 .header {
   @include m.flex(space-between, center);
+  position: relative;
+  z-index: 20;
   padding: 10px 15px;
+  background-color: v.$color-white;
+
+  // PC画面:headerごと非表示(ハンバーガーメニューも表示しない)
+  @include m.mq(md) {
+    display: none;
+  }
+
+
+  // SP画面:スクロールしても画面上部に追従
+  @include m.mq-down(md) {
+    position: sticky;
+    top: 0;
+  }
 
   &__logo {
     width: 85px;
@@ -151,6 +201,8 @@ address {
 
   &__menu {
     @include m.stack(0, stretch);
+    position: relative;
+    z-index: 1;
     justify-content: space-between;
     width: 26px;
     height: 18px;
@@ -164,6 +216,66 @@ address {
     display: block;
     height: 1px;
     background-color: v.$color-black;
+    transition: transform v.$transition-base, opacity v.$transition-base;
+  }
+
+  // ハンバーガー→×への変形
+  &__menu.is-open {
+    .header__menu-bar {
+      &:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+  }
+
+  // SPのドロップダウンメニュー
+  &__nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    width: 100%;
+    background-color: v.$color-white;
+    box-shadow: 0 10px 20px rgba(#000, 0.08);
+    transition: grid-template-rows v.$transition-base;
+
+    &.is-open {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  &__nav-inner {
+    overflow: hidden;
+  }
+
+  &__nav-list {
+    @include m.stack(0, stretch);
+  }
+
+  &__nav-item {
+    border-top: 1px solid rgba(#000, 0.06);
+  }
+
+  &__nav-link {
+    display: block;
+    padding: 14px 20px;
+    @include m.font(v.$font-size-md, v.$font-weight-medium, 1);
+    text-decoration: none;
+  }
+
+  &__nav-cta {
+    @include m.cta-button;
+    margin: 15px auto 20px;
+    text-align: center;
   }
 }
 
@@ -176,6 +288,7 @@ address {
     height: auto;
     aspect-ratio: 430 / 774;
     object-fit: cover;
+    border-radius: 20px 20px 0 0;
   }
 }
 
@@ -210,7 +323,7 @@ address {
   max-width: 100%;
   padding-top: 52px; // バッジ分の余白(バッジ高さ72px - カードへの重なり20px)
 
-  & + & {
+  &+& {
     margin-top: 20px;
   }
 
@@ -254,7 +367,8 @@ address {
   &__title {
     @include m.font(v.$font-size-2xl, v.$font-weight-medium, v.$line-height-tight);
     color: v.$color-brown;
-    em{
+
+    em {
       font-weight: v.$font-weight-bold;
     }
   }
@@ -525,7 +639,7 @@ address {
     @include m.section-title(v.$font-size-2xl);
     margin-top: 34px;
 
-    > .tag {
+    >.tag {
       margin-bottom: 15px;
     }
   }
@@ -906,7 +1020,7 @@ address {
     @include m.font(v.$font-size-xl, v.$font-weight-medium, 32px);
     text-align: center;
 
-    > .tag {
+    >.tag {
       display: block;
       width: fit-content;
       margin: 5px auto;
@@ -1194,12 +1308,17 @@ address {
 }
 
 .faq-item {
-  @include m.flex(flex-start, center);
-  position: relative;
-  min-height: 71px;
-  padding: 12px 20px 12px 59px;
   border-radius: v.$radius-md;
   background-color: v.$color-brown;
+  overflow: hidden;
+
+  &__header {
+    @include m.flex(flex-start, center);
+    position: relative;
+    min-height: 71px;
+    padding: 12px 20px 12px 59px;
+    cursor: pointer;
+  }
 
   &__q {
     @include m.flex-center;
@@ -1216,7 +1335,56 @@ address {
   }
 
   &__question {
+    flex: 1;
     color: v.$color-white;
     @include m.font(v.$font-size-lg, v.$font-weight-medium);
   }
+
+  // 開閉矢印アイコン(閉:下向き / 開:回転して上向き)
+  &__icon {
+    @include m.chevron-down(12px, 7px, v.$color-white, 1.5px);
+    flex-shrink: 0;
+    margin-left: 10px;
+    transition: transform v.$transition-base;
+  }
+
+  &__answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows v.$transition-base;
+  }
+
+  &__answer-inner {
+    overflow: hidden;
+  }
+
+  &__answer-text {
+    padding: 0 20px 16px 59px;
+    color: v.$color-white;
+    @include m.font(v.$font-size-sm, v.$font-weight-regular);
+  }
+
+  &.is-open {
+    .faq-item__icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-item__answer {
+      grid-template-rows: 1fr;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+
+  .lp {
+    margin: 0 auto;
+  }
+
+  .fv {
+    &__img {
+      border-radius: 0;
+    }
+  }
+
 }
