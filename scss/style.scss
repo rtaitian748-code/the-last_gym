@@ -16,8 +16,94 @@ body {
   font-family: v.$font-family-base;
   @include m.font(v.$font-size-md, v.$font-weight-regular, v.$line-height-base);
   color: v.$color-black;
-  background-color: v.$color-brown-sub;
+  // background-color: v.$color-brown-sub;
+  position: relative;
+  isolation: isolate;
+  background: v.$color-brown-sub;
+  overflow-x: hidden;
+
+  &::before,
+  &::after {
+    position: fixed;
+    content: "";
+    z-index: -1;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    filter: blur(65px);
+    pointer-events: none;
+  }
+
+  // ブラウンの光
+  &::before {
+    top: 5%;
+    left: -120px;
+    background: rgba(255, 200, 0, 0.5);
+    animation: floating-light-01 24s ease-in-out infinite alternate;
+  }
+
+  // グリーンの光
+  &::after {
+    right: -120px;
+    bottom: 5%;
+    background: rgba(121, 194, 182, 0.4);
+    animation: floating-light-02 30s ease-in-out infinite alternate;
+  }
+
+
   -webkit-font-smoothing: antialiased;
+  position: relative;
+
+  // &::before {
+  //   position: absolute;
+  //   content: "";
+  //   background-image: url(../images/background.png);
+  //   background-position: center center;
+  //   background-repeat: no-repeat;
+  //   background-size: cover;
+  //   top: 0;
+  //   left: 0;
+  //   inset: 0;
+  //   z-index: -1;
+  //   width: 100%;
+  //   min-height: 100%;
+  // }
+}
+
+@keyframes floating-light-01 {
+  0% {
+    transform: translate(0, 0) scale(0.8);
+  }
+
+  35% {
+    transform: translate(180px, 180px) scale(1.15);
+  }
+
+  70% {
+    transform: translate(40px, 420px) scale(1.35);
+  }
+
+  100% {
+    transform: translate(280px, 650px) scale(0.9);
+  }
+}
+
+@keyframes floating-light-02 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  35% {
+    transform: translate(-180px, -180px) scale(1.2);
+  }
+
+  70% {
+    transform: translate(-50px, -420px) scale(0.85);
+  }
+
+  100% {
+    transform: translate(-280px, -650px) scale(1.1);
+  }
 }
 
 // reset.scss が全要素に line-height: 1 を指定しているため、テキスト要素は親の行間を継承させる
@@ -175,8 +261,8 @@ address {
   @include m.flex(space-between, center);
   position: relative;
   z-index: 20;
-  padding: 10px 15px;
-  background-color: v.$color-white;
+  padding: 15px;
+  background-color: v.$color-brown-sub;
 
   // PC画面:headerごと非表示(ハンバーガーメニューも表示しない)
   @include m.mq(md) {
@@ -214,8 +300,8 @@ address {
 
   &__menu-bar {
     display: block;
-    height: 1px;
-    background-color: v.$color-black;
+    height: 2px;
+    background-color: v.$color-brown;
     transition: transform v.$transition-base, opacity v.$transition-base;
   }
 
@@ -520,7 +606,7 @@ address {
   &__img {
     width: 310px;
     height: 310px;
-    border-radius: 36px;
+    border-radius: 10px;
     background-color: v.$color-gray;
     object-fit: cover;
   }
@@ -1052,14 +1138,17 @@ address {
   // 結論(テキスト + 画像)
   &__result {
     @include m.flex(space-between, center, row, 10px);
-    width: v.$card-width;
-    max-width: 100%;
+    width: 100%;
+    max-width: v.$card-width;
+    position: relative;
+    margin-top: 35px;
   }
 
   &__result-text {
     flex: 1;
     @include m.font(v.$font-size-xl, v.$font-weight-medium, 38px);
-    white-space: nowrap;
+    z-index: 2;
+    // white-space: nowrap;
   }
 
   &__result-em {
@@ -1069,14 +1158,19 @@ address {
   }
 
   &__result-img {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
     flex-shrink: 0;
     object-fit: contain;
 
-    &--box {
-      border-radius: v.$radius-md;
-      background-color: v.$color-gray;
-      object-fit: cover;
-    }
+    // &--box {
+    //   border-radius: v.$radius-md;
+    //   background-color: v.$color-gray;
+    //   object-fit: cover;
+    // }
   }
 
   // 結論(吹き出し)
@@ -1252,7 +1346,7 @@ address {
     @include m.flex(flex-start, flex-start, row, 19px);
     @include m.scroll-x;
     width: 100%;
-    padding-left: 102px;
+    padding-left: 80px;
 
     // 末尾の余白
     &::after {
@@ -1356,6 +1450,20 @@ address {
 
   &__answer-inner {
     overflow: hidden;
+  }
+
+  &__A {
+    @include m.flex-center;
+    position: absolute;
+    top: 16px;
+    left: 12px;
+    width: 40px;
+    height: 39px;
+    border: 1px solid v.$color-brown;
+    border-radius: v.$radius-sm;
+    background-color: v.$color-white;
+    color: v.$color-brown;
+    @include m.font(v.$font-size-xl, v.$font-weight-medium, 1);
   }
 
   &__answer-text {
